@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/PrinceNarteh/go-ecommerce-api/models"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -25,7 +26,8 @@ func ConnectDB() {
 	log.Println("Connected to the database successfully")
 	db.Logger = logger.Default.LogMode(logger.Info)
 	log.Println("Running Migrations")
-	// TODO: Add Migrations
+	// Add Migrations
+	db.AutoMigrate(&models.User{}, &models.Product{}, &models.Order{})
 
 	Database = DBInstance{Db: db}
 }
